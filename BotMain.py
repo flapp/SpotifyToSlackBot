@@ -9,11 +9,11 @@ from slackclient import SlackClient
 class SpotifyToSlackBot:
     def __init__(self):
         self.config = ConfigParser.ConfigParser()
-        self.config.read('token.ini')
+        self.config.read('config.ini')
         self.slackApiToken = self.config.get('spotify', 'apitoken')
 
         self.slackClient = SlackClient(self.slackApiToken)
-        self.botName = 'godify'
+        self.botName = self.config.get('slack', 'botname')
         self.botId = self.getBotId(self.botName)
         self.at_bot = "<@" + self.botId + ">"
 
@@ -52,7 +52,7 @@ class SpotifyToSlackBot:
 
     def getSpotifyLinesOnMac(self):
         #run osascripts
-                proc = subprocess.Popen(['osascript', '-'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+        proc = subprocess.Popen(['osascript', '-'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         artist = proc.communicate(self.osaLines['artist'])[0][:-1]
 
         proc = subprocess.Popen(['osascript', '-'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)

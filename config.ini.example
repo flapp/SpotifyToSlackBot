@@ -1,2 +1,5 @@
+[slack]
+botname=mybotname
+
 [spotify]
 apitoken=xoxb-123132978132978317981329781397
